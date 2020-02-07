@@ -11,20 +11,30 @@ namespace Nlib{
 	protected:
 		Type data;
 
-		TreeNode* left;
+		TreeNode<Type>* parent;
 
-		TreeNode* right;
+		TreeNode<Type>* left;
+
+		TreeNode<Type>* right;
 
 	public:
-		TreeNode(void): left(nullptr), right(nullptr){}
+		TreeNode(void): parent(nullptr), left(nullptr), right(nullptr){}
 
-		TreeNode(Type data): data(data), left(nullptr), right(nullptr){}
+		TreeNode(Type data): data(data), parent(nullptr), left(nullptr), right(nullptr){}
 
-		TreeNode(Type data, TreeNode* left, TreeNode* right): data(data), left(left), right(right){}
+		TreeNode(Type data, TreeNode<Type>* parent): data(data), parent(parent), left(nullptr), right(nullptr){}
+
+		TreeNode(Type data, TreeNode<Type>* parent, TreeNode<Type>* left, TreeNode<Type>* right): data(data), parent(parent), left(left), right(right){}
 
 		Type getData(void) const;
 
 		void setData(Type data);
+
+		TreeNode<Type>* getParent(void) const;
+
+		TreeNode<Type>* getLeftChild(void) const;
+
+		TreeNode<Type>* getRightChild(void) const;
 
 	};
 

@@ -15,6 +15,27 @@ void Nlib::TreeNode<Type>::setData(Type data){
 
 }
 
+template <class Type>
+Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getParent(void) const{
+
+	return parent;
+
+}
+
+template <class Type>
+Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getLeftChild(void) const{
+
+	return left;
+
+}
+
+template <class Type>
+Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getRightChild(void) const{
+
+	return right;
+
+}
+
 
 //-------- BinaryTree --------//
 template <class Type>
