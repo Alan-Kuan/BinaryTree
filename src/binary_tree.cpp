@@ -62,7 +62,7 @@ Nlib::TreeNode<Type>* Nlib::BinaryTree<Type>::getRoot(void) const{
 template <class Type>
 bool Nlib::BinaryTree<Type>::add(Type data){
 
-	Nlib::TreeNode<Type> new_node = new Nlib::TreeNode<Type>(data);
+	Nlib::TreeNode<Type>* new_node = new Nlib::TreeNode<Type>(data);
 
 	// memory allocation failed
 	if(new_node == nullptr)
@@ -132,5 +132,43 @@ void Nlib::BinaryTree<Type>::clear(void){
 	removeRecusively(root);
 
 	root = nullptr;
+
+}
+
+template <class Type>
+void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
+
+	if(node == nullptr)
+		return;
+
+	std::cout << prefix;
+   
+	if(isLeft)
+		std::cout << "├-";
+	else
+		std::cout << "└-";
+	
+	std::cout << node -> data << std::endl;
+
+	const std::string new_prefix = isLeft ? (prefix + "| ") : (prefix + "  ");
+
+	preorderPrint(node -> left, new_prefix, true);
+
+	preorderPrint(node -> right, new_prefix, false);
+
+}
+
+template <class Type>
+void Nlib::BinaryTree<Type>::print(void){
+
+	if(root == nullptr){
+
+		std::cout << "(empty)" << std::endl;
+
+		return;
+
+	}
+
+	preorderPrint(root, "", false);
 
 }

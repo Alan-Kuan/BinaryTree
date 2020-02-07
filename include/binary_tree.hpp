@@ -1,7 +1,9 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
+#include <iostream>
 #include <queue>
+#include <cstring>
 
 namespace Nlib{
 
@@ -48,6 +50,8 @@ namespace Nlib{
 	protected:
 		TreeNode<Type>* root;
 
+		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
+
 	public:
 		BinaryTree(void): root(nullptr){}
 
@@ -61,6 +65,9 @@ namespace Nlib{
 		void removeRecusively(TreeNode<Type>* node);
 
 		void clear(void);
+
+		// print the tree with preorder visit
+		void print(void);
 
 	};
 
