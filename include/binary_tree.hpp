@@ -35,6 +35,8 @@ namespace Nlib{
 		TreeNode<Type>* getLeftChild(void) const;
 
 		TreeNode<Type>* getRightChild(void) const;
+		
+		bool hasChildren(void) const;
 
 	};
 
@@ -50,6 +52,10 @@ namespace Nlib{
 		BinaryTree(TreeNode<Type>* root): root(root){}
 
 		~BinaryTree(void);
+
+		TreeNode<Type>* getRoot(void) const;
+
+		void removeRecusively(TreeNode<Type>* node);
 
 		void clear(void);
 

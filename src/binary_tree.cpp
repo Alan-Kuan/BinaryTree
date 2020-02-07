@@ -36,11 +36,49 @@ Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getRightChild(void) const{
 
 }
 
+template <class Type>
+bool Nlib::TreeNode<Type>::hasChildren(void) const{
+
+	return left != nullptr || right != nullptr;
+
+}
+
 
 //-------- BinaryTree --------//
 template <class Type>
 Nlib::BinaryTree<Type>::~BinaryTree(void){
 
 	clear();
+
+}
+
+template <class Type>
+Nlib::TreeNode<Type>* Nlib::BinaryTree<Type>::getRoot(void) const{
+
+	return root;
+
+}
+
+template <class Type>
+void Nlib::BinaryTree<Type>::removeRecusively(Nlib::TreeNode<Type>* node){
+
+	if(node != nullptr){
+
+		removeRecusively(node -> left);
+
+		removeRecusively(node -> right);
+
+		delete node;
+
+	}
+
+}
+
+template <class Type>
+void Nlib::BinaryTree<Type>::clear(void){
+	
+	removeRecusively(root);
+
+	root = nullptr;
 
 }
