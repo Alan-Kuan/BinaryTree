@@ -73,4 +73,6 @@ namespace Nlib{
 
 }
 
+#include "../src/binary_tree.tpp"
+
 #endif
