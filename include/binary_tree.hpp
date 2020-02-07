@@ -1,6 +1,8 @@
 #ifndef BINARY_TREE_HPP
 #define BINARY_TREE_HPP
 
+#include <queue>
+
 namespace Nlib{
 
 	template <class Type>
@@ -49,11 +51,12 @@ namespace Nlib{
 	public:
 		BinaryTree(void): root(nullptr){}
 
-		BinaryTree(TreeNode<Type>* root): root(root){}
-
 		~BinaryTree(void);
 
 		TreeNode<Type>* getRoot(void) const;
+
+		// add a new node with BFS
+		bool add(Type data);
 
 		void removeRecusively(TreeNode<Type>* node);
 

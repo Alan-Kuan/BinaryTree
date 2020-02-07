@@ -60,6 +60,58 @@ Nlib::TreeNode<Type>* Nlib::BinaryTree<Type>::getRoot(void) const{
 }
 
 template <class Type>
+bool Nlib::BinaryTree<Type>::add(Type data){
+
+	Nlib::TreeNode<Type> new_node = new Nlib::TreeNode<Type>(data);
+
+	// memory allocation failed
+	if(new_node == nullptr)
+		return false;
+
+	if(root == nullptr){
+
+		root = new_node;
+
+		return true;
+
+	}
+
+	// add a new node with BFS
+	std::queue<Nlib::TreeNode<Type>*> Q;
+
+	Q.push(root);
+
+	while(!Q.empty()){
+
+		Nlib::TreeNode<Type>* node = Q.front();
+
+		Q.pop();
+
+		if(node -> left == nullptr){
+
+			node -> left = new_node;
+
+			break;
+
+		}else
+			Q.push(node -> left);
+
+		if(node -> right == nullptr){
+
+			node -> right = new_node;
+
+			break;
+
+		}else
+			Q.push(node -> right);
+
+	}
+
+	return true;
+
+} 
+
+template <class Type>
 void Nlib::BinaryTree<Type>::removeRecusively(Nlib::TreeNode<Type>* node){
 
 	if(node != nullptr){
