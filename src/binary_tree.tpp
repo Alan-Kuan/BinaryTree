@@ -136,25 +136,32 @@ void Nlib::BinaryTree<Type>::clear(void){
 }
 
 template <class Type>
-void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
+void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft, bool parentHasRightChild) const{
 
 	if(node == nullptr)
 		return;
 
 	std::cout << prefix;
    
-	if(isLeft)
+	if(isLeft && parentHasRightChild)
 		std::cout << "├-";
 	else
 		std::cout << "└-";
 	
-	std::cout << node -> data << std::endl;
+	std::cout << node -> data;
+   
+	// If the node is a leaf node and it's a left child of its parent, then shows that it's left.
+	// I did this for the reason that in most of the time, a node with the prefix '└-' is a right child of its parent.
+	if(isLeft && !parentHasRightChild)
+		std:: cout << " (left)";
 
-	const std::string new_prefix = isLeft ? (prefix + "| ") : (prefix + "  ");
+	std::cout << std::endl;
 
-	preorderPrint(node -> left, new_prefix, true);
+	const std::string new_prefix = prefix + (isLeft ? "| " : "  ");
 
-	preorderPrint(node -> right, new_prefix, false);
+	preorderPrint(node -> left, new_prefix, true, node -> right != nullptr);
+
+	preorderPrint(node -> right, new_prefix, false, node -> right != nullptr);
 
 }
 
@@ -169,6 +176,6 @@ void Nlib::BinaryTree<Type>::print(void){
 
 	}
 
-	preorderPrint(root, "", false);
+	preorderPrint(root, "", false, root -> right != nullptr);
 
 }
