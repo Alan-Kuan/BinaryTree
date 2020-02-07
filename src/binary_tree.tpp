@@ -91,6 +91,8 @@ bool Nlib::BinaryTree<Type>::add(Type data){
 
 			node -> left = new_node;
 
+			new_node -> parent = node;
+
 			break;
 
 		}else
@@ -99,6 +101,8 @@ bool Nlib::BinaryTree<Type>::add(Type data){
 		if(node -> right == nullptr){
 
 			node -> right = new_node;
+
+			new_node -> parent = node;
 
 			break;
 
