@@ -50,7 +50,7 @@ namespace Nlib{
 	protected:
 		TreeNode<Type>* root;
 
-		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft, bool parentHasRightChild) const;
+		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
 
 	public:
 		BinaryTree(void): root(nullptr){}
