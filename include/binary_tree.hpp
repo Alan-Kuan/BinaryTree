@@ -12,6 +12,8 @@ namespace Nlib{
 
 		template <class> friend class BinaryTree;
 
+		template <class> friend class BinarySearchTree;
+
 	protected:
 		Type data;
 
