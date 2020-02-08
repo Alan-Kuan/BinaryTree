@@ -1,9 +1,15 @@
 CC = g++
 
-.PHONY: demo, clean
+vpath %.hpp include/
+vpath %.tpp src/
 
-demo: examples/binary_tree_demo.cpp src/binary_tree.tpp include/binary_tree.hpp
+.PHONY: demo, demo2, clean
+
+demo: examples/binary_tree_demo.cpp binary_tree.tpp binary_tree.hpp
 	$(CC) -o run_demo $<
+
+demo2: examples/binary_search_tree_demo.cpp binary_search_tree.tpp binary_search_tree.hpp binary_tree.tpp binary_tree.hpp
+	$(CC) -o run_demo2 $<
 
 clean:
 	-rm *.o
