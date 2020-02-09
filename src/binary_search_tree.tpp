@@ -114,12 +114,25 @@ void Nlib::BinarySearchTree<Type>::remove(Nlib::TreeNode<Type>* node){
 	if(node == nullptr)
 		return;
 
-	Nlib::TreeNode<Type>** indirect = &node;
+	Nlib::TreeNode<Type>** indirect = &(this -> root);
+
+	while(*indirect != nullptr){
+
+		if(node -> data < (*indirect) -> data)
+			indirect = &((*indirect) -> left);
+		else if(node -> data > (*indirect) -> data)
+			indirect = &((*indirect) -> right);
+		else
+			break;
+
+	}
 
 	// if the removed node is a leaf node, just remove it
 	if(!node -> hasChildren()){
 
 		*indirect = nullptr;
+
+		delete node;
 
 	// if the removed node has two children, replace its data with its inorder successor's
 	// and remove its inorder successor
@@ -130,11 +143,13 @@ void Nlib::BinarySearchTree<Type>::remove(Nlib::TreeNode<Type>* node){
 		// because its inorder successor is the node with the smallest data in its right subtree
 		Nlib::TreeNode<Type>* successor = getInorderSuccessor(node);
 
-		node -> data = successor -> data;
+		Type tmp_data = successor -> data;
 
 		// because it's either a leaf node or a node with only one child
 		// its removal will be easy
 		remove(successor);
+
+		node -> data = tmp_data;
 
 	// if the removed node has one child, bypass it
 	}else{
@@ -152,10 +167,10 @@ void Nlib::BinarySearchTree<Type>::remove(Nlib::TreeNode<Type>* node){
 			node -> right -> parent = node -> parent;
 
 		}
+
+		delete node;
 	
 	}
-
-	delete node;
 
 }
 
