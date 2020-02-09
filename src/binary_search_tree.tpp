@@ -160,8 +160,16 @@ void Nlib::BinarySearchTree<Type>::remove(Nlib::TreeNode<Type>* node){
 }
 
 template <class Type>
-void Nlib::BinarySearchTree<Type>::remove(Type data){
+bool Nlib::BinarySearchTree<Type>::remove(Type data){
 
-	remove(search(data));
+	Nlib::TreeNode<Type>* node = search(data);
+
+	// not found
+	if(node == nullptr)
+		return false;
+
+	remove(node);
+
+	return true;
 
 }

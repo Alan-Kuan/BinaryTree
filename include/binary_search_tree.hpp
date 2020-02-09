@@ -11,6 +11,8 @@ namespace Nlib{
 	protected:
 		TreeNode<Type>* getInorderSuccessor(TreeNode<Type>* node) const;
 
+		void remove(TreeNode<Type>* node);
+
 	public:
 		// this is different from the add method in BinaryTree class
 		bool add(Type data);
@@ -19,9 +21,7 @@ namespace Nlib{
 
 		bool exists(Type data) const;
 
-		void remove(Type data);
-
-		void remove(TreeNode<Type>* node);
+		bool remove(Type data);
 
 	};
 

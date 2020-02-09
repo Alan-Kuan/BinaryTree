@@ -58,8 +58,7 @@ int main(void){
 				cout << data << " is" << (BST.exists(data) ? "" : " not" ) << " in the tree" << endl;
 				break;
 			case Cmd::remove:
-				BST.remove(data);
-			    cout << "Successfully removed." << endl;
+				BST.remove(data) ?  cout << "Successfully removed." << endl : cout << "Failed: Not found!" << endl;
 				break;
 			case Cmd::clear:
 				BST.clear();
