@@ -145,12 +145,23 @@ void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std
 	if(node == nullptr)
 		return;
 
+	std::string new_prefix = prefix;
+
 	std::cout << prefix;
    
-	if(isLeft && node -> parent -> right != nullptr)
+	if(isLeft && node -> parent -> right != nullptr){
+
 		std::cout << "├-";
-	else
+
+		new_prefix += "| ";
+
+	}else{
+
 		std::cout << "└-";
+
+		new_prefix += "  ";
+
+	}
 	
 	std::cout << node -> data;
    
@@ -160,8 +171,6 @@ void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std
 		std:: cout << " (left)";
 
 	std::cout << std::endl;
-
-	const std::string new_prefix = prefix + (isLeft ? "| " : "  ");
 
 	preorderPrint(node -> left, new_prefix, true);
 
