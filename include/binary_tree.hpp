@@ -65,6 +65,8 @@ namespace Nlib{
 
 		void updateHeight(TreeNode<Type>* node);
 
+		void removeRecusively(TreeNode<Type>* node);
+
 		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
 
 		void inorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
@@ -78,8 +80,6 @@ namespace Nlib{
 
 		// add a new node with BFS
 		bool add(Type data);
-
-		void removeRecusively(TreeNode<Type>* node);
 
 		void clear(void);
 
