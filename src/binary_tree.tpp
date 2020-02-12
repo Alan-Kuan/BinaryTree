@@ -11,13 +11,6 @@ namespace Nlib{
 	}
 
 	template <class Type>
-	void TreeNode<Type>::setData(Type data){
-
-		this -> data = data;
-
-	}
-
-	template <class Type>
 	TreeNode<Type>* TreeNode<Type>::getParent(void) const{
 
 		return parent;
@@ -45,6 +38,13 @@ namespace Nlib{
 
 	}
 
+	template <class Type>
+	unsigned int TreeNode<Type>::getHeight(void) const{
+
+		return height;
+
+	}
+
 
 	//-------- BinaryTree --------//
 	template <class Type>
@@ -58,6 +58,24 @@ namespace Nlib{
 	TreeNode<Type>* BinaryTree<Type>::getRoot(void) const{
 
 		return root;
+
+	}
+
+	template <class Type>
+	void BinaryTree<Type>::updateHeight(TreeNode<Type>* node){
+
+		for(TreeNode<Type>* curr = node; curr != nullptr; curr = curr -> parent){
+
+			if(curr -> left == nullptr && curr -> right == nullptr)
+				curr -> height = 0;
+			else if(curr -> right == nullptr)
+				curr -> height = curr -> left -> height + 1;
+			else if(curr -> left == nullptr)
+				curr -> height = curr -> right -> height + 1;
+			else
+				curr -> height = max(curr -> left -> height, curr -> right -> height) + 1;
+
+		}
 
 	}
 
@@ -112,6 +130,8 @@ namespace Nlib{
 				Q.push(node -> right);
 
 		}
+
+		updateHeight(new_node -> parent);
 
 		return true;
 

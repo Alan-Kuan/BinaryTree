@@ -5,6 +5,12 @@
 #include <queue>
 #include <cstring>
 
+inline unsigned int max(unsigned int a, unsigned int b){
+
+	return a > b ? a : b;
+
+}
+
 namespace Nlib{
 
 	enum class PrintStyle{
@@ -19,6 +25,8 @@ namespace Nlib{
 
 		template <class> friend class BinarySearchTree;
 
+		template <class> friend class AVLTree;
+
 	protected:
 		Type data;
 
@@ -28,18 +36,14 @@ namespace Nlib{
 
 		TreeNode<Type>* right;
 
+		unsigned int height;
+
 	public:
-		TreeNode(void): parent(nullptr), left(nullptr), right(nullptr){}
+		TreeNode(void): parent(nullptr), left(nullptr), right(nullptr), height(0){}
 
-		TreeNode(Type data): data(data), parent(nullptr), left(nullptr), right(nullptr){}
-
-		TreeNode(Type data, TreeNode<Type>* parent): data(data), parent(parent), left(nullptr), right(nullptr){}
-
-		TreeNode(Type data, TreeNode<Type>* parent, TreeNode<Type>* left, TreeNode<Type>* right): data(data), parent(parent), left(left), right(right){}
+		TreeNode(Type data): data(data), parent(nullptr), left(nullptr), right(nullptr), height(0){}
 
 		Type getData(void) const;
-
-		void setData(Type data);
 
 		TreeNode<Type>* getParent(void) const;
 
@@ -49,6 +53,8 @@ namespace Nlib{
 		
 		bool hasChildren(void) const;
 
+		unsigned int getHeight(void) const;
+
 	};
 
 	template <class Type>
@@ -56,6 +62,8 @@ namespace Nlib{
 
 	protected:
 		TreeNode<Type>* root;
+
+		void updateHeight(TreeNode<Type>* node);
 
 		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
 

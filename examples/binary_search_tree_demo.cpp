@@ -65,6 +65,7 @@ int main(void){
 				cout << "Successfully cleared." << endl;
 				break;
 			case Cmd::print:
+				cout << "height: " << BST.getRoot() -> getHeight() << endl;
 				BST.print(PrintStyle::stretch);
 				break;
 			default:

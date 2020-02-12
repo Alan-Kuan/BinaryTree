@@ -55,6 +55,7 @@ int main(void){
 				cout << "Successfully cleared." << endl;
 				break;
 			case Cmd::print:
+				cout << "height: " << bt.getRoot() -> getHeight() << endl;
 				bt.print(PrintStyle::suspend);
 				break;
 			default:

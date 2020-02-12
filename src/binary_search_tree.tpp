@@ -53,6 +53,8 @@ namespace Nlib{
 
 		}
 
+		updateHeight(new_node -> parent);
+
 		// duplicate data is not allowed
 		return false;
 
@@ -134,6 +136,8 @@ namespace Nlib{
 
 			*indirect = nullptr;
 
+			updateHeight(node -> parent);
+
 			delete node;
 
 		// if the removed node has two children, replace its data with its inorder successor's
@@ -169,6 +173,8 @@ namespace Nlib{
 				node -> right -> parent = node -> parent;
 
 			}
+
+			updateHeight(node -> parent);
 
 			delete node;
 		
