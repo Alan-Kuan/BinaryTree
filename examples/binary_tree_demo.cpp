@@ -10,7 +10,7 @@ namespace Cmd {
 	enum {
 
 		exit,
-		add,
+		insert,
 		clear,
 		print
 
@@ -27,7 +27,7 @@ int main(void){
 	do{
 
 		cout << Cmd::exit  << ": exit, ";
-		cout << Cmd::add   << ": add, ";
+		cout << Cmd::insert   << ": insert, ";
 		cout << Cmd::clear << ": clear, ";
 		cout << Cmd::print << ": print" << endl;
 
@@ -35,7 +35,7 @@ int main(void){
 
 		cin >> cmd;
 
-		if(cmd == Cmd::add){
+		if(cmd == Cmd::insert){
 
 			cout << "Enter the new data: ";
 
@@ -47,8 +47,8 @@ int main(void){
 
 			case Cmd::exit:
 				break;
-			case Cmd::add:
-				bt.add(new_data) ? cout << "Successfully added " << new_data << '.' << endl : cout << "Failed: memory allocation failed." << endl;
+			case Cmd::insert:
+				bt.insert(new_data) ? cout << "Successfully added " << new_data << '.' << endl : cout << "Failed: memory allocation failed." << endl;
 				break;
 			case Cmd::clear:
 				bt.clear();

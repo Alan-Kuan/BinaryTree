@@ -10,7 +10,7 @@ namespace Cmd{
 	enum {
 
 		exit,
-		add,
+		insert,
 		exists,
 		remove,
 		clear,
@@ -29,7 +29,7 @@ int main(void){
 	do{
 
 		cout << Cmd::exit << ": exit, ";
-		cout << Cmd::add  << ": add, ";
+		cout << Cmd::insert  << ": insert, ";
 		cout << Cmd::exists << ": exists, ";
 		cout << Cmd::remove << ": remove, ";
 		cout << Cmd::clear << ": clear, ";
@@ -39,7 +39,7 @@ int main(void){
 
 		cin >> cmd;
 
-		if(Cmd::add <= cmd && cmd <= Cmd::remove){
+		if(Cmd::insert <= cmd && cmd <= Cmd::remove){
 
 			cout << "Enter the data: ";
 
@@ -51,8 +51,8 @@ int main(void){
 
 			case Cmd::exit:
 				break;
-			case Cmd::add:
-				BST.add(data) ? cout << "Successfully added " << data << '.' << endl : cout << "Failed: Duplicate data or memory allocation failed." << endl;
+			case Cmd::insert:
+				BST.insert(data) ? cout << "Successfully added " << data << '.' << endl : cout << "Failed: Duplicate data or memory allocation failed." << endl;
 				break;
 			case Cmd::exists:
 				cout << data << " is" << (BST.exists(data) ? "" : " not" ) << " in the tree" << endl;

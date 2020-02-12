@@ -3,7 +3,7 @@
 namespace Nlib{
 
 	template <class Type>
-	bool BinarySearchTree<Type>::add(TreeNode<Type>* node, TreeNode<Type>* new_node){
+	bool BinarySearchTree<Type>::insert(TreeNode<Type>* node, TreeNode<Type>* new_node){
 
 		if(new_node -> data < node -> data){
 
@@ -18,7 +18,7 @@ namespace Nlib{
 				return true;
 
 			}else
-				return add(node -> left, new_node);
+				return insert(node -> left, new_node);
 
 		}else if(new_node -> data > node -> data){
 
@@ -33,7 +33,7 @@ namespace Nlib{
 				return true;
 
 			}else
-				return add(node -> right, new_node);
+				return insert(node -> right, new_node);
 
 		}
 
@@ -43,7 +43,7 @@ namespace Nlib{
 	}
 
 	template <class Type>
-	bool BinarySearchTree<Type>::add(Type data){
+	bool BinarySearchTree<Type>::insert(Type data){
 
 		TreeNode<Type>* new_node = new TreeNode<Type>(data);
 
@@ -59,7 +59,7 @@ namespace Nlib{
 
 		}
 
-		return add(this -> root, new_node);
+		return insert(this -> root, new_node);
 
 	}
 

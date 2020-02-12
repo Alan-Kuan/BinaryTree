@@ -80,7 +80,7 @@ namespace Nlib{
 	}
 
 	template <class Type>
-	bool BinaryTree<Type>::add(Type data){
+	bool BinaryTree<Type>::insert(Type data){
 
 		TreeNode<Type>* new_node = new TreeNode<Type>(data);
 

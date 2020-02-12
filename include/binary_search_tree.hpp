@@ -9,15 +9,15 @@ namespace Nlib{
 	class BinarySearchTree: public BinaryTree<Type>{
 	
 	protected:
-		bool add(TreeNode<Type>* node, TreeNode<Type>* new_node);
+		bool insert(TreeNode<Type>* node, TreeNode<Type>* new_node);
 
 		TreeNode<Type>* getInorderSuccessor(TreeNode<Type>* node) const;
 
 		void remove(TreeNode<Type>* node);
 
 	public:
-		// this is different from the add method in BinaryTree class
-		bool add(Type data);
+		// Overriding 
+		bool insert(Type data);
 
 		TreeNode<Type>* search(Type data) const;
 

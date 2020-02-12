@@ -78,8 +78,8 @@ namespace Nlib{
 
 		TreeNode<Type>* getRoot(void) const;
 
-		// add a new node with BFS
-		bool add(Type data);
+		// insert a new node with BFS
+		virtual bool insert(Type data);
 
 		void clear(void);
 
