@@ -1,205 +1,209 @@
 #include "../include/binary_tree.hpp"
 
-//-------- TreeNode --------//
-template <class Type>
-Type Nlib::TreeNode<Type>::getData(void) const{
+namespace Nlib{
 
-	return data;
+	//-------- TreeNode --------//
+	template <class Type>
+	Type TreeNode<Type>::getData(void) const{
 
-}
+		return data;
 
-template <class Type>
-void Nlib::TreeNode<Type>::setData(Type data){
+	}
 
-	this -> data = data;
+	template <class Type>
+	void TreeNode<Type>::setData(Type data){
 
-}
+		this -> data = data;
 
-template <class Type>
-Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getParent(void) const{
+	}
 
-	return parent;
+	template <class Type>
+	TreeNode<Type>* TreeNode<Type>::getParent(void) const{
 
-}
+		return parent;
 
-template <class Type>
-Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getLeftChild(void) const{
+	}
 
-	return left;
+	template <class Type>
+	TreeNode<Type>* TreeNode<Type>::getLeftChild(void) const{
 
-}
+		return left;
 
-template <class Type>
-Nlib::TreeNode<Type>* Nlib::TreeNode<Type>::getRightChild(void) const{
+	}
 
-	return right;
+	template <class Type>
+	TreeNode<Type>* TreeNode<Type>::getRightChild(void) const{
 
-}
+		return right;
 
-template <class Type>
-bool Nlib::TreeNode<Type>::hasChildren(void) const{
+	}
 
-	return left != nullptr || right != nullptr;
+	template <class Type>
+	bool TreeNode<Type>::hasChildren(void) const{
 
-}
+		return left != nullptr || right != nullptr;
+
+	}
 
 
-//-------- BinaryTree --------//
-template <class Type>
-Nlib::BinaryTree<Type>::~BinaryTree(void){
+	//-------- BinaryTree --------//
+	template <class Type>
+	BinaryTree<Type>::~BinaryTree(void){
 
-	clear();
+		clear();
 
-}
+	}
 
-template <class Type>
-Nlib::TreeNode<Type>* Nlib::BinaryTree<Type>::getRoot(void) const{
+	template <class Type>
+	TreeNode<Type>* BinaryTree<Type>::getRoot(void) const{
 
-	return root;
+		return root;
 
-}
+	}
 
-template <class Type>
-bool Nlib::BinaryTree<Type>::add(Type data){
+	template <class Type>
+	bool BinaryTree<Type>::add(Type data){
 
-	Nlib::TreeNode<Type>* new_node = new Nlib::TreeNode<Type>(data);
+		TreeNode<Type>* new_node = new TreeNode<Type>(data);
 
-	// memory allocation failed
-	if(new_node == nullptr)
-		return false;
+		// memory allocation failed
+		if(new_node == nullptr)
+			return false;
 
-	if(root == nullptr){
+		if(root == nullptr){
 
-		root = new_node;
+			root = new_node;
+
+			return true;
+
+		}
+
+		// add a new node with BFS
+		std::queue<TreeNode<Type>*> Q;
+
+		Q.push(root);
+
+		while(!Q.empty()){
+
+			TreeNode<Type>* node = Q.front();
+
+			Q.pop();
+
+			if(node -> left == nullptr){
+
+				node -> left = new_node;
+
+				new_node -> parent = node;
+
+				break;
+
+			}else
+				Q.push(node -> left);
+
+			if(node -> right == nullptr){
+
+				node -> right = new_node;
+
+				new_node -> parent = node;
+
+				break;
+
+			}else
+				Q.push(node -> right);
+
+		}
 
 		return true;
 
-	}
+	} 
 
-	// add a new node with BFS
-	std::queue<Nlib::TreeNode<Type>*> Q;
+	template <class Type>
+	void BinaryTree<Type>::removeRecusively(TreeNode<Type>* node){
 
-	Q.push(root);
+		if(node != nullptr){
 
-	while(!Q.empty()){
+			removeRecusively(node -> left);
 
-		Nlib::TreeNode<Type>* node = Q.front();
+			removeRecusively(node -> right);
 
-		Q.pop();
+			delete node;
 
-		if(node -> left == nullptr){
-
-			node -> left = new_node;
-
-			new_node -> parent = node;
-
-			break;
-
-		}else
-			Q.push(node -> left);
-
-		if(node -> right == nullptr){
-
-			node -> right = new_node;
-
-			new_node -> parent = node;
-
-			break;
-
-		}else
-			Q.push(node -> right);
+		}
 
 	}
 
-	return true;
+	template <class Type>
+	void BinaryTree<Type>::clear(void){
+		
+		removeRecusively(root);
 
-} 
-
-template <class Type>
-void Nlib::BinaryTree<Type>::removeRecusively(Nlib::TreeNode<Type>* node){
-
-	if(node != nullptr){
-
-		removeRecusively(node -> left);
-
-		removeRecusively(node -> right);
-
-		delete node;
+		root = nullptr;
 
 	}
 
-}
+	template <class Type>
+	void BinaryTree<Type>::preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
 
-template <class Type>
-void Nlib::BinaryTree<Type>::clear(void){
-	
-	removeRecusively(root);
+		if(node == nullptr)
+			return;
 
-	root = nullptr;
+		std::string new_prefix = prefix;
 
-}
+		std::cout << prefix;
+	   
+		if(isLeft && node -> parent -> right != nullptr){
 
-template <class Type>
-void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
+			std::cout << "├-";
 
-	if(node == nullptr)
-		return;
+			new_prefix += "| ";
 
-	std::string new_prefix = prefix;
+		}else{
 
-	std::cout << prefix;
-   
-	if(isLeft && node -> parent -> right != nullptr){
+			std::cout << "└-";
 
-		std::cout << "├-";
+			new_prefix += "  ";
 
-		new_prefix += "| ";
+		}
+		
+		std::cout << node -> data;
+	   
+		// If the node is a left child of its parent and its parent does not have a right child, then shows that it's left.
+		// I did this for the reason that in most of the time, a node with the prefix '└-' is a right child of its parent.
+		if(isLeft && node -> parent -> right == nullptr)
+			std:: cout << " (left)";
 
-	}else{
+		std::cout << std::endl;
 
-		std::cout << "└-";
+		preorderPrint(node -> left, new_prefix, true);
 
-		new_prefix += "  ";
+		preorderPrint(node -> right, new_prefix, false);
 
 	}
-	
-	std::cout << node -> data;
-   
-	// If the node is a left child of its parent and its parent does not have a right child, then shows that it's left.
-	// I did this for the reason that in most of the time, a node with the prefix '└-' is a right child of its parent.
-	if(isLeft && node -> parent -> right == nullptr)
-		std:: cout << " (left)";
 
-	std::cout << std::endl;
+	template <class Type>
+	void BinaryTree<Type>::inorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
 
-	preorderPrint(node -> left, new_prefix, true);
+		if(node == nullptr)
+			return;
 
-	preorderPrint(node -> right, new_prefix, false);
+		inorderPrint(node -> left, prefix + (isLeft ? "  " : "| "), true);
 
-}
+		std::cout << prefix << (isLeft ? "┌-" : "└-") << node -> data << std::endl;
 
-template <class Type>
-void Nlib::BinaryTree<Type>::inorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
+		inorderPrint(node -> right, prefix + (isLeft ? "| " : "  "), false);
 
-	if(node == nullptr)
-		return;
+	}
 
-	inorderPrint(node -> left, prefix + (isLeft ? "  " : "| "), true);
+	template <class Type>
+	void BinaryTree<Type>::print(PrintStyle style){
 
-	std::cout << prefix << (isLeft ? "┌-" : "└-") << node -> data << std::endl;
+		if(root == nullptr)
+			std::cout << "(empty)" << std::endl;
+		else if(style == PrintStyle::suspend)
+			preorderPrint(root, "", false);
+		else if(style == PrintStyle::stretch)
+			inorderPrint(root, "", false);
 
-	inorderPrint(node -> right, prefix + (isLeft ? "| " : "  "), false);
-
-}
-
-template <class Type>
-void Nlib::BinaryTree<Type>::print(PrintStyle style){
-
-	if(root == nullptr)
-		std::cout << "(empty)" << std::endl;
-	else if(style == PrintStyle::suspend)
-		preorderPrint(root, "", false);
-	else if(style == PrintStyle::stretch)
-		inorderPrint(root, "", false);
+	}
 
 }
