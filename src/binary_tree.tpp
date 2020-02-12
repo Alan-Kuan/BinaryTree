@@ -185,7 +185,7 @@ namespace Nlib{
 
 		}
 		
-		std::cout << node -> data;
+		std::cout << '(' << node -> data << ')';
 	   
 		// If the node is a left child of its parent and its parent does not have a right child, then shows that it's left.
 		// I did this for the reason that in most of the time, a node with the prefix '└-' is a right child of its parent.
@@ -208,7 +208,7 @@ namespace Nlib{
 
 		inorderPrint(node -> left, prefix + (isLeft ? "  " : "| "), true);
 
-		std::cout << prefix << (isLeft ? "┌-" : "└-") << node -> data << std::endl;
+		std::cout << prefix << (isLeft ? "┌-" : "└-") << '(' << node -> data << ')' << std::endl;
 
 		inorderPrint(node -> right, prefix + (isLeft ? "| " : "  "), false);
 
