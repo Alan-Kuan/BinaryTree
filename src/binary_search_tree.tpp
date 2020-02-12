@@ -3,6 +3,46 @@
 namespace Nlib{
 
 	template <class Type>
+	bool BinarySearchTree<Type>::add(TreeNode<Type>* node, TreeNode<Type>* new_node){
+
+		if(new_node -> data < node -> data){
+
+			if(node -> left == nullptr){
+
+				node -> left = new_node;
+
+				new_node -> parent = node;
+
+				this -> updateHeight(node);
+
+				return true;
+
+			}else
+				return add(node -> left, new_node);
+
+		}else if(new_node -> data > node -> data){
+
+			if(node -> right == nullptr){
+
+				node -> right = new_node;
+
+				new_node -> parent = node;
+
+				this -> updateHeight(node);
+
+				return true;
+
+			}else
+				return add(node -> right, new_node);
+
+		}
+
+		// duplicate data are not allowed
+		return false;
+
+	}
+
+	template <class Type>
 	bool BinarySearchTree<Type>::add(Type data){
 
 		TreeNode<Type>* new_node = new TreeNode<Type>(data);
@@ -19,44 +59,7 @@ namespace Nlib{
 
 		}
 
-		TreeNode<Type>* curr = this -> root;
-
-		while(data != curr -> data){
-
-			if(data < curr -> data){
-
-				if(curr -> left == nullptr){
-
-					curr -> left = new_node;
-
-					new_node -> parent = curr;
-
-					return true;
-
-				}else
-					curr = curr -> left;
-
-			}else if(data > curr -> data){
-
-				if(curr -> right == nullptr){
-
-					curr -> right = new_node;
-
-					new_node -> parent = curr;
-
-					return true;
-
-				}else
-					curr = curr -> right;
-
-			}
-
-		}
-
-		updateHeight(new_node -> parent);
-
-		// duplicate data is not allowed
-		return false;
+		return add(this -> root, new_node);
 
 	}
 
@@ -136,7 +139,7 @@ namespace Nlib{
 
 			*indirect = nullptr;
 
-			updateHeight(node -> parent);
+			this -> updateHeight(node -> parent);
 
 			delete node;
 
@@ -174,7 +177,7 @@ namespace Nlib{
 
 			}
 
-			updateHeight(node -> parent);
+			this -> updateHeight(node -> parent);
 
 			delete node;
 		

@@ -9,6 +9,8 @@ namespace Nlib{
 	class BinarySearchTree: public BinaryTree<Type>{
 	
 	protected:
+		bool add(TreeNode<Type>* node, TreeNode<Type>* new_node);
+
 		TreeNode<Type>* getInorderSuccessor(TreeNode<Type>* node) const;
 
 		void remove(TreeNode<Type>* node);
