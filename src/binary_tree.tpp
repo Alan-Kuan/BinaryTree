@@ -179,16 +179,27 @@ void Nlib::BinaryTree<Type>::preorderPrint(Nlib::TreeNode<Type>* node, const std
 }
 
 template <class Type>
-void Nlib::BinaryTree<Type>::print(void){
+void Nlib::BinaryTree<Type>::inorderPrint(Nlib::TreeNode<Type>* node, const std::string& prefix, bool isLeft) const{
 
-	if(root == nullptr){
-
-		std::cout << "(empty)" << std::endl;
-
+	if(node == nullptr)
 		return;
 
-	}
+	inorderPrint(node -> left, prefix + (isLeft ? "  " : "| "), true);
 
-	preorderPrint(root, "", false);
+	std::cout << prefix << (isLeft ? "┌-" : "└-") << node -> data << std::endl;
+
+	inorderPrint(node -> right, prefix + (isLeft ? "| " : "  "), false);
+
+}
+
+template <class Type>
+void Nlib::BinaryTree<Type>::print(PrintStyle style){
+
+	if(root == nullptr)
+		std::cout << "(empty)" << std::endl;
+	else if(style == PrintStyle::suspend)
+		preorderPrint(root, "", false);
+	else if(style == PrintStyle::stretch)
+		inorderPrint(root, "", false);
 
 }

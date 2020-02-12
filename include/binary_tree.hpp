@@ -7,6 +7,11 @@
 
 namespace Nlib{
 
+	enum class PrintStyle{
+		suspend,
+		stretch
+	};
+
 	template <class Type>
 	class TreeNode{
 
@@ -54,6 +59,8 @@ namespace Nlib{
 
 		void preorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
 
+		void inorderPrint(TreeNode<Type>* node, const std::string& prefix, bool isLeft) const;
+
 	public:
 		BinaryTree(void): root(nullptr){}
 
@@ -69,7 +76,7 @@ namespace Nlib{
 		void clear(void);
 
 		// print the tree with preorder visit
-		void print(void);
+		void print(PrintStyle style);
 
 	};
 

@@ -55,7 +55,7 @@ int main(void){
 				cout << "Successfully cleared." << endl;
 				break;
 			case Cmd::print:
-				bt.print();
+				bt.print(PrintStyle::suspend);
 				break;
 			default:
 				cout << "Wrong command!" << endl;

@@ -65,7 +65,7 @@ int main(void){
 				cout << "Successfully cleared." << endl;
 				break;
 			case Cmd::print:
-				BST.print();
+				BST.print(PrintStyle::stretch);
 				break;
 			default:
 				cout << "Wrong command!" << endl;
