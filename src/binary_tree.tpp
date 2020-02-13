@@ -62,20 +62,24 @@ namespace Nlib{
 	}
 
 	template <class Type>
+	void BinaryTree<Type>::updateCurrHeight(TreeNode<Type>* curr){
+
+		if(curr -> left == nullptr && curr -> right == nullptr)
+			curr -> height = 0;
+		else if(curr -> right == nullptr)
+			curr -> height = curr -> left -> height + 1;
+		else if(curr -> left == nullptr)
+			curr -> height = curr -> right -> height + 1;
+		else
+			curr -> height = max(curr -> left -> height, curr -> right -> height) + 1;
+
+	}
+
+	template <class Type>
 	void BinaryTree<Type>::updateHeight(TreeNode<Type>* node){
 
-		for(TreeNode<Type>* curr = node; curr != nullptr; curr = curr -> parent){
-
-			if(curr -> left == nullptr && curr -> right == nullptr)
-				curr -> height = 0;
-			else if(curr -> right == nullptr)
-				curr -> height = curr -> left -> height + 1;
-			else if(curr -> left == nullptr)
-				curr -> height = curr -> right -> height + 1;
-			else
-				curr -> height = max(curr -> left -> height, curr -> right -> height) + 1;
-
-		}
+		for(TreeNode<Type>* curr = node; curr != nullptr; curr = curr -> parent)
+			updateCurrHeight(curr);
 
 	}
 

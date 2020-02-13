@@ -63,6 +63,10 @@ namespace Nlib{
 	protected:
 		TreeNode<Type>* root;
 
+		// update only given node's height
+		void updateCurrHeight(TreeNode<Type>* curr);
+
+		// update the heights of all nodes along the way up to the root from the given node
 		void updateHeight(TreeNode<Type>* node);
 
 		void removeRecusively(TreeNode<Type>* node);
