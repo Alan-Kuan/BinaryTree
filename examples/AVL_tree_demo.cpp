@@ -65,7 +65,8 @@ int main(void){
 				cout << "Successfully cleared." << endl;
 				break;
 			case Cmd::print:
-				cout << "height: " << avl_tree.getRoot() -> getHeight() << endl;
+				if(!avl_tree.empty())
+					cout << "height: " << avl_tree.getRoot() -> getHeight() << endl;
 				avl_tree.print(PrintStyle::stretch);
 				break;
 			default:

@@ -62,6 +62,13 @@ namespace Nlib{
 	}
 
 	template <class Type>
+	bool BinaryTree<Type>::empty(void) const{
+
+		return root == nullptr;
+
+	}
+
+	template <class Type>
 	void BinaryTree<Type>::updateCurrHeight(TreeNode<Type>* curr){
 
 		if(curr -> left == nullptr && curr -> right == nullptr)
