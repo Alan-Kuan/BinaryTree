@@ -13,7 +13,7 @@ namespace Nlib{
 
 		TreeNode<Type>* getInorderSuccessor(TreeNode<Type>* node) const;
 
-		void remove(TreeNode<Type>* node);
+		virtual void remove(TreeNode<Type>* node);
 
 	public:
 		// Overriding 
@@ -23,7 +23,7 @@ namespace Nlib{
 
 		bool exists(Type data) const;
 
-		bool remove(Type data);
+		virtual bool remove(Type data);
 
 	};
 
