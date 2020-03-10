@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../include/AVL_tree.hpp"
+#include "AVL_tree.hpp"
 
 using namespace std;
 

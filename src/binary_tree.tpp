@@ -1,4 +1,4 @@
-#include "../include/binary_tree.hpp"
+#include "binary_tree.hpp"
 
 namespace Nlib{
 
