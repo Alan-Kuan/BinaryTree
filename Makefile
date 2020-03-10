@@ -7,7 +7,7 @@ AVLT = AVL_tree.tpp AVL_tree.hpp
 vpath %.hpp include/
 vpath %.tpp src/
 
-.PHONY: all, demo, demo2, demo3, clean
+.PHONY: all demo demo2 demo3 clean
 
 all: demo demo2 demo3
 
